@@ -6,7 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-// 겟으로 진입햇을때 어떤 작업을 실행하는가 
+
 @Controller
 public class HomeController {
 	
