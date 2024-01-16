@@ -26,7 +26,7 @@ pageEncoding="UTF-8"%>
       <div class="menu">
          <ul>
             <li>
-               <a>로그인</a>
+               <a href="<c:url value='/member/login'/>">로그인</a>
             </li>
             <li>
                <a>회원가입</a>

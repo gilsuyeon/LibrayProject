@@ -1,4 +1,4 @@
-package com.goodee.libray;
+package com.goodee.library;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class HomeController {
 	
 	private static final Logger LOGGER =
-			LoggerFactory.getILoggerFactory(HomeController.class);
+			LoggerFactory.getLogger(HomeController.class);
 	
 	// 겟으로 진입햇을때 어떤 작업을 실행하는가를 컨트롤에 적어줌
 	// / 면서 GET 방식일때 이 URL를 타겠다
