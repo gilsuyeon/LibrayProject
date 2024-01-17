@@ -35,4 +35,13 @@ public class MemberService {
 			
 			
 		}
+		
+		public int modifyMember (MemberVo vo) {
+			LOGGER.info("[MemberService] modifyMember();");
+			return dao.updateMember(vo);
+		}
+		public String modifyMemberConfirm() {
+			LOGGER.info("[MemberService]  modifyMemberConfirm();");
+			
+		}
 }
