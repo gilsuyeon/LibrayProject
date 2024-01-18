@@ -16,7 +16,7 @@
   	</insert>
   	
   	<select id="selectMember" parameterType="String" resultType="com.goodee.library.member.MemberVo">
-  		SELECT * FROM tabl_member
+  		SELECT * FROM tbl_member
   		<where>
   			m_id = #{m_id}
   		</where>
@@ -34,11 +34,43 @@
   		m_phone = #{m_phone},
   		m_mod_date = NOW()
   		<where>
-  			m_no = # {m_no}
+  			m_no = #{m_no}
   		</where>
   		
   		
   	</update>
+  	 <!-- 아이디는 일꾼 parameterType : 어떤정보를 주면서 일시키는지  resultType : 정보 담을 바구니 -->
+  	<select id="selectMemberOne" parameterType="int" resultType="com.goodee.library.member.MemberVo">
+  		SELECT * FROM tbl_member
+  		<where>
+  			m_no = #{m_no}
+  		</where>
+  	</select>
+  	
+  	<!-- select 추가  -->
+  	<!-- 여기는 파라미터르 넣고 파라미터를 받는 경우임 그래서 똑같음 -->
+  	<select id="selectMemberForPassword" parameterType="com.goodee.library.member.MemberVo" resultType="com.goodee.library.member.MemberVo">
+  		SELECT * FROM tbl_member
+  		<where>
+  			m_id = #{m_id}
+  			m_name = #{m_name} AND
+  			m_mail = #{m_mail} AND
+  		</where>
+  	</select>
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	
   	
   	
 </mapper>

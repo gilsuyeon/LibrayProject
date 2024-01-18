@@ -105,7 +105,7 @@ public class MemberController {
 		
 		// 회원 정보 수정 화면 이동
 		@RequestMapping(value="/{m_no}", method=RequestMethod.GET)
-		public String modifyMember(@PathVariable int m_no, HttpSession sesssion) {
+		public String modifyMember(@PathVariable int m_no, HttpSession session) {
 				LOGGER.info("[MemberController] modifyMember();");
 				// 다른 사람의 정보 수정 o
 				// 1. url에 있는 m_no 기준 select 
@@ -134,9 +134,8 @@ public class MemberController {
 		
 		
 		// 회원 정보 수정 기능
-		@RequestMapping(value="/{m_no", method=RequestMethod.POST)
-		//MemberVo vo 정보를 가져옴
-		public String modifyMemberConfirm(MemberVo vo,HttpSession session) {
+		@RequestMapping(value="/{m_no}", method=RequestMethod.POST)
+		public String modifyMemberConfirm(MemberVo vo,HttpSession session) {//MemberVo vo 정보를 가져옴
 			LOGGER.info("[MemberController] modifyMemberConfirm();");
 			// 1. 회원 정보 수정 (DB)
 			
@@ -146,15 +145,39 @@ public class MemberController {
 			// 성공
 			if(result > 0) {
 				// 2. 세션 정보 변경
+				//MemberVo loginedMemberVo = new MemberVo(); 바구니
+				// 바뀐 정보가 세션에 저장
 				MemberVo loginedMemberVo = new MemberVo();
 				loginedMemberVo = memberService.getLoginedMemberVo(vo.getM_no());
 				session.setAttribute("loginMember", loginedMemberVo);
 				session.setMaxInactiveInterval(60*30);
 				// 3. 성공 화면 이동
+				return "member/modify_success";
 			}else {	
 				// 3. 실패 화면 이동
+				return "member/modify_fail";
 			}
 		}
+		
+		// 비밀번호 설정 화면 이동
+		@RequestMapping(value="/findPassword", method=RequestMethod.GET)
+		public String findPasswordForm() {
+			LOGGER.info("[MemberController] findPasswordForm();");
+			return "member/find_password_form";
+		}
+		
+		// 비밀번호 설정 기능
+		@RequestMapping(value="/findPassword", method=RequestMethod.POST)
+		public String findPasswordConfirm(MemberVo vo) {  // MemberVo vo : 일을 시키려면 정보를 주면서 시켜야됨
+			LOGGER.info("[MemberController] findPasswordConfirm();");			
+			int result = memberService.findPasswordConfirm(vo);
+			if(result <= 0) {
+				return "member/find_password_fail";
+			} else {
+				return "member/find_password_success";
+			}
+		}
+		
 		
 		
 		

@@ -27,7 +27,7 @@
             </form>
          </div>
          <div class="find_password_create_account">
-            <a> 비밀번호 찾기 </a>
+            <a href="<c:url value='/member/findPassword'/>"> 비밀번호 찾기 </a> <!--a태그느 get으로 간다  -->
             <a href="<c:url value='/member/create'/>">회원가입</a>
          </div>
       </div>

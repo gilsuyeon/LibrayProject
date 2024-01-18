@@ -32,11 +32,11 @@ public class MemberDao {
 	private SqlSession sqlSession;
 	
 	// 아이디 중복 검사 - mybatis
-	public boolean isMemberCheck (String m id) {
+	public boolean isMemberCheck (String m_id) {
 		LOGGER.info("[MemberDao] isMemberCheck();");
 		//("com.goodee.library.member.MemberDao.isMemberCheck"); memebr_mapper.xml에서 namespace과 맞춰주는것
 		//결과를 하나만(md_id) 조회해라
-		int result = sqlSession.selectOne(namespace+"isMemberCheck",md_id);
+		int result = sqlSession.selectOne(namespace+"isMemberCheck",m_id);
 		if(result > 0) return true;
 		else return false;
 	}
@@ -48,6 +48,7 @@ public class MemberDao {
 		vo.setM_pw(passwordEncoder.encode(vo.getM_pw()));
 		int result = -1;
 		result = sqlSession.insert(namespace+"insertMember",vo);
+		return result;
 	}
 	
 	// 로그인 - 회원정보 조회 및 비밀번호 확인
@@ -150,10 +151,24 @@ public class MemberDao {
 		public int updateMember(MemberVo vo) {
 			LOGGER.info("MemberDao updateMember();");
 			int result = sqlSession.update(namespace+"updateMember",vo);
-			
+			return result;
 			
 			
 		}
+		
+		// 회원 단일 정보를 데이터베이스에서 조회 (m_no 조회)
+		public MemberVo selectMemberOne(int m_no) {
+			//m_no 이 정보를 주면서 일을 시킴
+			return sqlSession.selectOne(namespace+"selectMemberOne",m_no);
+		}
+		// 아이디,이름,메일 기준 회원 조회
+		public MemberVo selectMemberOne(MemberVo vo) {
+			MemberVo memberVo= sqlSession.selectOne(namespace+"selectMemberForPasswaord",vo);
+			return memberVo;
+		}
+		
+		
+
 		
 		
 }
