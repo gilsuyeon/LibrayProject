@@ -52,25 +52,31 @@
   	<select id="selectMemberForPassword" parameterType="com.goodee.library.member.MemberVo" resultType="com.goodee.library.member.MemberVo">
   		SELECT * FROM tbl_member
   		<where>
-  			m_id = #{m_id}
+  			m_id = #{m_id} AND
   			m_name = #{m_name} AND
-  			m_mail = #{m_mail} AND
+  			m_mail = #{m_mail} 
   		</where>
   	</select>
   	
   	
+	<!-- tbl member 테이블에 
+	m_pw 를 #{m_pw}로 변경
+	m_mod_date를 현재시간으로 변경
+	조건 : m_id가 #{m_id} -->
+  	<update id="updatePassword" parameterType="hashMap">
+  		
+  		UPDATE tbl_member
+  		SET m_pw = #{m_pw},
+  			m_mod_date = NOW()
+  		<where>
+  			m_id = #{m_id}
+  		</where>	
+  		 
+  		
   	
+  	</update>
   	
-  	
-  	
-  	
-  	
-  	
-  	
-  	
-  	
-  	
-  	
+ 
   	
   	
 </mapper>

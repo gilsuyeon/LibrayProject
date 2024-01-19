@@ -103,32 +103,47 @@ public class MemberController {
 			return "member/listup";
 		}	
 		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		// 회원 정보 수정 화면 이동
 		@RequestMapping(value="/{m_no}", method=RequestMethod.GET)
 		public String modifyMember(@PathVariable int m_no, HttpSession session) {
 				LOGGER.info("[MemberController] modifyMember();");
-				// 다른 사람의 정보 수정 o
-				// 1. url에 있는 m_no 기준 select 
-				// 2. 수정 화면 이동
+//				// 다른 사람의 정보 수정 o
+//				// 1. url에 있는 m_no 기준 select 
+//				// 2. 수정 화면 이동
+//				
+//				// 내 정보 수정하고 싶으면 로그인 해야 됨 로그인 해야된다는건 session를 확인해야됨
+//				// 내 정보만 수정 o
+//				// 1. 세션에 있는 m_no 기준
+//				// 2. 수정 화면 
+//				MemberVo loginedMemberVo  = (MemberVo)session.getAttribute("loginMember");
+//				String nextPage = "";
+//				// 로그인 정보만 비어있으면
+//				if(loginedMemberVo == null) {
+//					// 로그인 화면 이동
+//					// redirect: 다시 연결
+//					nextPage = "redirect:/member/login";
+//				} else {
+//					// 수정 화면 이동
+//					nextPage = "member/modify_form";
+//				}
+//				
 				
-				// 내 정보 수정하고 싶으면 로그인 해야 됨 로그인 해야된다는건 session를 확인해야됨
-				// 내 정보만 수정 o
-				// 1. 세션에 있는 m_no 기준
-				// 2. 수정 화면 
-				MemberVo loginedMemberVo  = (MemberVo)session.getAttribute("loginMember");
-				String nextPage = "";
-				// 로그인 정보만 비어있으면
-				if(loginedMemberVo == null) {
-					// 로그인 화면 이동
-					// redirect: 다시 연결
-					nextPage = "redirect:/member/login";
-				} else {
-					// 수정 화면 이동
-					nextPage = "member/modify_form";
-				}
-				
-				
-				return nextPage;
+				return "member/modify_form";
 			
 		}
 		
