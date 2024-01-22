@@ -26,6 +26,17 @@ public class MemberService {
 	@Autowired
 	JavaMailSenderImpl javaMailSenderImpl;
 	
+	// 회원가입
+	public int createMember(MemberVo vo) {
+		LOGGER.info("[MemberService] createMember();");
+		int result = 0; 
+		// 유저(아이디) 중복 확인
+		if(dao.isMemberCheck(vo.getM_id()) == false) {  // 아이디가 존재하지 않으면 
+			result = dao.insertMember(vo);              // insert 동작
+		}
+		return result;
+	}
+	
 	// 아이디를 기준으로 정보를 조회
 		// 아이디 줄테니까 정보좀 가지고 와라
 		// (MemberVo vo) 컨트롤러에게 아이디랑 비번 정보를 전달 받는거임

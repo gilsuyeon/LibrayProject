@@ -21,7 +21,30 @@ public class MemberController {
 	@Autowired
 	MemberService memberService;
 	
-	// 로그민 화면 이동
+		// 회원가입 화면 이동
+		@RequestMapping(value="/create", method=RequestMethod.GET)
+		public String openMemberCreate() {
+			LOGGER.info("[MemberController] openMemberCreate();");
+			// WEB-INF/views/member/create.jsp
+			return "member/create";
+		}
+		
+		// 회원가입 기능 수행
+		@RequestMapping(value="/create", method=RequestMethod.POST)
+		public String createMember(MemberVo vo) {
+			LOGGER.info("[MemberController] createMember();");
+			
+			// insert 성공시 이동할 페이지
+			String nextPage = "member/create_success";
+			
+			// insert 실패시 이동할 페이지
+			if(memberService.createMember(vo) <= 0) { 
+				nextPage = "member/create_fail";     
+			}
+			return nextPage;
+		}
+	
+		// 로그민 화면 이동
 		@RequestMapping(value="/login", method=RequestMethod.GET)
 		public String opendLoginForm() {
 			LOGGER.info("[MemberController] openLoginForm();");
