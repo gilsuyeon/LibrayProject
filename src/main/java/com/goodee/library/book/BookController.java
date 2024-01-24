@@ -4,6 +4,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -63,7 +65,60 @@ public class BookController {
 		return "book/create_fail";
 	}
   }
-}
+	
+	// 도서 수정 이동
+	@RequestMapping(value="/modify/{b_no}", method=RequestMethod.GET)
+	public String modifyBookForm(@PathVariable int b_no , Model model) {  // 수정화면을 위해서는 정보전달이 필요
+		// 1. 기존 정보 조회
+		BookVo vo = bookService.bookDetail(b_no);
+		// 2. 화면 전환 + 정보 전달
+		model.addAttribute("bookVo",vo);
+		return "book/modify";
+		//book/modify.css
+	}
+	// 도서 수정 기능
+	@RequestMapping(value="/modify/{b_no}", method=RequestMethod.POST)
+	public String modifyBookConfirm(BookVo vo, @RequestParam("file") MultipartFile file) {   //BookVo vo로 필요한 정보 받아올거임 , file정보는 따로 받아옴
+		LOGGER.info("[BookController] modifyBookConfirm()");
+		// 1. 만약에 새로운 파일 o -> 파일 업로드
+		if(file.getOriginalFilename().equals("") == false) { //파일이 있으면
+			String savedFileName = uploadFileService.upload(file);
+			if(savedFileName != null) {
+				vo.setB_thumbnail(savedFileName);  // 비어있지 않다면 B_thumbnail(savedFileName)를 해준다
+			}
+		}
+		// 2. 도서 정보 수정  // update의 결과는 항상 int
+				int result = bookService.modifyConfirm(vo);
+		
+		
+		// (1) BookService에 modifyConfirm 메소드생성
+		// (2) BookDao에 updateBook 메소드 생성
+		// (3) BookService의 modifyConfirm이 BookDao의 updateBook으로부터
+		// int(update 수행결과)를 전달
+		// (4) book_mapper에 updateBook 쿼리 생성ㅇ
+		// -> 파라미터가 BookVo
+		// -> tbl_book을 UPDATE
+		// -> b_name, b_author, b_pulisher, b_publish_year, b_mod_date
+		// -> 만약에 b_thumnail이 null이 아니면서 빈 스트링이 아니라면 b_thumnail도 수정
+				
+				
+		// 3. 결과 화면 이동
+		if(result <= 0) {
+				return "book/modify_fail";
+	      } else {
+	    	  	 return "book/modify_success";
+			
+		}
+	}
+}		 
+		
+	
+	
+	
+	
+	
+	
+
 	
 	
 	

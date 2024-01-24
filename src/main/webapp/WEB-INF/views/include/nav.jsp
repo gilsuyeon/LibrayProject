@@ -45,6 +45,9 @@
             <li>
             	<a href="<c:url value='/book/create'/>">도서등록</a>
             </li>
+            <li>
+               <a href="<c:url value='/book/modify/1'/>">도서 수정</a>
+            </li>
          </ul>
       </div>
       <div class="search">

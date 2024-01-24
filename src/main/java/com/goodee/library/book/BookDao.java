@@ -23,6 +23,17 @@ public class BookDao {
 			
 		
 	}
+	// 도서 상세 조회
+	  public BookVo selectBookOne(int b_no) {
+	      LOGGER.info("[BookDao] selectBookOne();");
+	      BookVo vo = sqlSession.selectOne(namespace+"selectBookOne",b_no);
+	      return vo;
+	   }
+	  
+	  public int updateBook(BookVo vo) {
+		  LOGGER.info("[BookDao] updateBook();");  //namespace+"updateBook"  updateBook는 쿼리 이름
+		  return sqlSession.update(namespace+"updateBook",vo); //sql 쿼리를 날려줘 정보주면서
+	  }
 	
 	
 }
