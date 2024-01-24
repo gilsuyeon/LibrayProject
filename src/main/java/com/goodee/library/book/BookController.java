@@ -111,7 +111,7 @@ public class BookController {
 		}
 	}
 	
-	// 도서 삭제 기능
+	// 도서 삭제
 }		 
 		
 	
