@@ -55,9 +55,10 @@
          
          <div class="buttons">
            <a class="modify_book_button" href="/book/modify/${bookVo.b_no}">도서 수정</a>
-            <a class="delete_book_button" href="">도서 삭제</a>         
+            <a class="delete_book_button" href="delete_book_button" onclick="deleteBook('${bookVo.b_no}');">도서 삭제</a>   <!-- onclick하면 function함수가 호출됨 -->      
          </div>
       </div>
    </section>
+   
 </body>
 </html>

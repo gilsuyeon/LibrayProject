@@ -48,6 +48,9 @@
             <li>
                <a href="<c:url value='/book/modify/1'/>">도서 수정</a>
             </li>
+              <li>
+               <a onclick="deleteBook('1');">도서 삭제</a>
+            </li>
          </ul>
       </div>
       <div class="search">
@@ -59,3 +62,29 @@
       <%} %>
    </div>
 </nav>    
+<script type="text/javascript">
+   function deleteBook(bookNo) { 
+	   let result = confirm('해당 도서를 정말 삭제하시겠습니까?');
+	   
+	   if(result) {  
+		   fetch('/book/'+bookNo,{
+			   method:'DELETE',
+			   headers:{
+				   'Content-type':'application/jason;charset=utf-8'
+			   }
+		   })
+		   .then(response => response.text())
+		   .then(data => { 
+			   if(data === '400') {
+				   alert('삭제성공');
+				   location.replace('/book');
+			   }else{
+				   alert('삭제실패');
+			   }
+		   })
+		   .catch(error => {
+			   console.log(error);
+		   });
+	   }
+   }
+   </script>

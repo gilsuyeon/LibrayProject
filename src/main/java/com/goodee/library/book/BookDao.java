@@ -34,6 +34,11 @@ public class BookDao {
 		  LOGGER.info("[BookDao] updateBook();");  //namespace+"updateBook"  updateBook는 쿼리 이름
 		  return sqlSession.update(namespace+"updateBook",vo); //sql 쿼리를 날려줘 정보주면서
 	  }
-	
+	//도서 삭제 기능    //int b_no 라는 정보를 받아서 일처리를 함
+	  public int deleteBook(int b_no) {  
+		  LOGGER.info("[BookDao] deleteBook();");
+		  int result = sqlSession.delete(namespace+"deleteBook",b_no);
+		  return result;
+	  }
 	
 }

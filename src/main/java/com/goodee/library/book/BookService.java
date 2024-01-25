@@ -29,6 +29,10 @@ public class BookService {
 		LOGGER.info("[BookService] modifyConfirm();");
 		return bookDao.updateBook(vo);
 	}
- 
+	// 도서 삭제 기능
+	public int deleteBook(int b_no) {  
+		LOGGER.info("[BookService] deleteBook();");
+		return bookDao.deleteBook(b_no);   // 다오야 b_no라는 정보를 넘겨줄테니 일좀 해줘
+	}
 
 }
